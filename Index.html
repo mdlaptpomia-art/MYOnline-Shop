@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>আমার অনলাইন শপ</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+
+body{
+    background:#f4f8ff;
+    color:#172033;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#fff;
+    box-shadow:0 2px 12px rgba(0,0,0,.1);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    min-height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 15px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:bold;
+    color:#1264d8;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.nav-btn{
+    border:0;
+    background:#1264d8;
+    color:#fff;
+    padding:10px 13px;
+    border-radius:8px;
+}
+
+.language{
+    border:1px solid #ccd5e3;
+    background:#fff;
+    padding:9px;
+    border-radius:8px;
+    outline:none;
+}
+
+.notice{
+    background:#1264d8;
+    color:#fff;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.notice-text{
+    display:inline-block;
+    padding:9px 0;
+    padding-left:100%;
+    animation:notice 16s linear infinite;
+}
+
+@keyframes notice{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-100%);
+    }
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px 15px 50px;
+}
+
+.slider{
+    width:100%;
+    height:300px;
+    overflow:hidden;
+    border-radius:16px;
+    background:#ddd;
+}
+
+.slider img{
+    display:none;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.slider img.active{
+    display:block;
+}
+
+.section-title{
+    margin:27px 0 15px;
+    color:#1264d8;
+}
+
+.offers{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.offer{
+    background:#fff;
+    padding:18px;
+    border-radius:13px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    border-left:4px solid #1264d8;
+}
+
+.search{
+    margin:20px 0 13px;
+}
+
+.search input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccd5e3;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:4px 0 8px;
+}
+
+.categories button{
+    white-space:nowrap;
+    border:1px solid #1264d8;
+    background:#fff;
+    color:#1264d8;
+    padding:9px 14px;
+    border-radius:22px;
+}
+
+.categories button.active{
+    background:#1264d8;
+    color:#fff;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fill,minmax(220px,1fr));
+    gap:17px;
+}
+
+.product{
+    background:#fff;
+    overflow:hidden;
+    border-radius:14px;
+    box-shadow:0 3px 13px rgba(0,0,0,.08);
+}
+
+.product-image{
+    width:100%;
+    height:215px;
+    object-fit:cover;
+    background:#eee;
+}
+
+.product-body{
+    padding:13px;
+}
+
+.product-category{
+    display:inline-block;
+    background:#e9f2ff;
+    color:#1264d8;
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.product-code{
+    color:#555;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.product-code b{
+    color:#1264d8;
+    font-size:15px;
+}
+
+.product-name{
+    font-weight:bold;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.price{
+    font-size:20px;
+    color:#0b8f4d;
+    font-weight:bold;
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:#888;
+}
+
+.discount{
+    background:#ffe5e5;
+    color:#d00000;
+    padding:3px 7px;
+    border-radius:5px;
+    font-size:12px;
+}
+
+.details{
+    color:#555;
+    line-height:1.5;
+    font-size:14px;
+    margin:9px 0;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.order-btn,
+.details-btn{
+    flex:1;
+    border:0;
+    color:#fff;
+    padding:10px 5px;
+    border-radius:8px;
+}
+
+.order-btn{
+    background:#0b8f4d;
+}
+
+.details-btn{
+    background:#1264d8;
+}
+
+/* PAYMENT */
+
+.payment-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.payment-card{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.payment-logo{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 10px;
+    color:#fff;
+    font-weight:bold;
+    font-size:24px;
+}
+
+.bkash{
+    background:#e2136e;
+}
+
+.nagad{
+    background:#f58220;
+}
+
+.cod{
+    background:#1264d8;
+}
+
+.payment-number{
+    font-size:19px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.available{
+    color:#0b8f4d;
+    font-size:13px;
+    margin-top:7px;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:3000;
+    padding:15px;
+    overflow:auto;
+}
+
+.modal-box{
+    max-width:600px;
+    margin:35px auto;
+    background:#fff;
+    border-radius:16px;
+    padding:20px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:7px;
+    font-size:31px;
+    cursor:pointer;
+}
+
+.modal-image{
+    width:100%;
+    max-height:350px;
+    object-fit:cover;
+    border-radius:11px;
+    margin-bottom:15px;
+}
+
+.modal-code{
+    color:#1264d8;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+.modal-price{
+    color:#0b8f4d;
+    font-size:24px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.modal-details{
+    line-height:1.7;
+    color:#555;
+}
+
+.modal-order{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:0;
+    border-radius:8px;
+    background:#0b8f4d;
+    color:#fff;
+    font-size:16px;
+}
+
+/* LOGIN */
+
+.login{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    z-index:5000;
+    padding:20px;
+}
+
+.login-box{
+    max-width:380px;
+    margin:100px auto;
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+}
+
+.login-box h2{
+    color:#1264d8;
+    margin-bottom:15px;
+}
+
+.login-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccd5e3;
+    border-radius:8px;
+    margin-bottom:12px;
+}
+
+.login-actions{
+    display:flex;
+    gap:8px;
+}
+
+.login-actions button{
+    flex:1;
+    padding:11px;
+    border:0;
+    border-radius:8px;
+}
+
+.login-submit{
+    background:#1264d8;
+    color:#fff;
+}
+
+/* ADMIN */
+
+.admin{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:4000;
+    background:#f4f8ff;
+    overflow:auto;
+}
+
+.admin-header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#1264d8;
+    color:#fff;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.admin-header button{
+    border:0;
+    padding:8px 13px;
+    border-radius:7px;
+}
+
+.admin-container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px 15px 60px;
+}
+
+.admin-section{
+    background:#fff;
+    padding:18px;
+    border-radius:13px;
+    margin-bottom:18px;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+
+.admin-section h3{
+    color:#1264d8;
+    margin-bottom:15px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccd5e3;
+    border-radius:8px;
+    outline:none;
+}
+
+.field textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.save-btn{
+    margin-top:12px;
+    border:0;
+    padding:11px 18px;
+    background:#0b8f4d;
+    color:#fff;
+    border-radius:8px;
+}
+
+.blue-btn{
+    border:0;
+    padding:10px 14px;
+    background:#1264d8;
+    color:#fff;
+    border-radius:8px;
+}
+
+.red-btn{
+    border:0;
+    padding:8px 12px;
+    background:#d00000;
+    color:#fff;
+    border-radius:7px;
+}
+
+.product-admin{
+    border:1px solid #ddd;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:13px;
+}
+
+.product-admin-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.help{
+    background:#eef6ff;
+    border-left:4px solid #1264d8;
+    padding:13px;
+    border-radius:7px;
+    line-height:1.7;
+}
+
+.toast{
+    display:none;
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    background:#172033;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:8px;
+    z-index:8000;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .navbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .logo{
+        text-align:center;
+    }
+
+    .nav-right{
+        justify-content:center;
+    }
+
+    .slider{
+        height:190px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .product-image{
+        height:160px;
+    }
+
+    .product-body{
+        padding:9px;
+    }
+
+    .product-name{
+        font-size:15px;
+    }
+
+    .price{
+        font-size:17px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="navbar">
+
+<div class="logo"
+id="shopLogo">
+আমার অনলাইন শপ
+</div>
+
+<div class="nav-right">
+
+<select
+class="language"
+id="languageSelect"
+onchange="changeLanguage(this.value)"
+>
+
+<option value="bn">🇧🇩 বাংলা</option>
+<option value="en">🇬🇧 English</option>
+<option value="zh">🇨🇳 中文</option>
+<option value="ja">🇯🇵 日本語</option>
+<option value="hi">🇮🇳 हिन्दी</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="de">🇩🇪 Deutsch</option>
+<option value="es">🇪🇸 Español</option>
+<option value="it">🇮🇹 Italiano</option>
+<option value="ko">🇰🇷 한국어</option>
+<option value="ar">🇸🇦 العربية</option>
+<option value="ru">🇷🇺 Русский</option>
+<option value="pt">🇵🇹 Português</option>
+<option value="tr">🇹🇷 Türkçe</option>
+<option value="id">🇮🇩 Indonesia</option>
+
+</select>
+
+<button
+class="nav-btn"
+onclick="scrollProducts()"
+id="productsBtn">
+🛍️ পণ্য
+</button>
+
+<button
+class="nav-btn"
+onclick="openLogin()">
+⚙️ Admin
+</button>
+
+</div>
+
+</div>
+
+<div class="notice">
+
+<div
+class="notice-text"
+id="notice">
+কম দামে ভালো পণ্য কিনুন
+</div>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<div
+class="slider"
+id="slider">
+</div>
+
+<h2
+class="section-title"
+id="offerTitle">
+🎉 বিশেষ অফার
+</h2>
+
+<div
+class="offers"
+id="offers">
+</div>
+
+<h2
+class="section-title"
+id="productTitle">
+🛍️ আমাদের পণ্য
+</h2>
+
+<div class="categories">
+
+<button
+class="active"
+onclick="setCategory('সব',this)"
+>
+সব
+</button>
+
+<button
+onclick="setCategory('পোশাক',this)"
+>
+👕 পোশাক
+</button>
+
+<button
+onclick="setCategory('শার্ট',this)"
+>
+👕 শার্ট
+</button>
+
+<button
+onclick="setCategory('প্যান্ট',this)"
+>
+👖 প্যান্ট
+</button>
+
+<button
+onclick="setCategory('ইলেকট্রনিক',this)"
+>
+💻 ইলেকট্রনিক
+</button>
+
+<button
+onclick="setCategory('জুতা',this)"
+>
+👟 জুতা
+</button>
+
+<button
+onclick="setCategory('চশমা',this)"
+>
+👓 চশমা
+</button>
+
+</div>
+
+<div class="search">
+
+<input
+id="search"
+type="text"
+oninput="renderProducts()"
+placeholder="পণ্যের নাম বা Product Code দিয়ে খুঁজুন..."
+>
+
+</div>
+
+<div
+class="products"
+id="products">
+</div>
+
+<h2
+class="section-title"
+id="paymentTitle">
+💳 পেমেন্ট অপশন
+</h2>
+
+<div
+class="payment-grid"
+id="payment">
+</div>
+
+</main>
+
+<div
+class="modal"
+id="detailsModal">
+
+<div class="modal-box">
+
+<span
+class="close"
+onclick="closeDetails()">
+×
+</span>
+
+<img
+class="modal-image"
+id="modalImage">
+
+<h2 id="modalName"></h2>
+
+<div
+class="modal-code"
+id="modalCode">
+</div>
+
+<div id="modalCategory"></div>
+
+<div
+class="modal-price"
+id="modalPrice">
+</div>
+
+<p
+class="modal-details"
+id="modalDetails">
+</p>
+
+<button
+class="modal-order"
+id="modalOrder">
+🛒 অর্ডার করুন
+</button>
+
+</div>
+
+</div>
+
+<div
+class="login"
+id="login">
+
+<div class="login-box">
+
+<h2>🔐 Admin Login</h2>
+
+<input
+id="password"
+type="password"
+placeholder="Admin Password"
+>
+
+<div class="login-actions">
+
+<button
+class="login-submit"
+onclick="loginAdmin()">
+Login
+</button>
+
+<button
+onclick="closeLogin()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="admin"
+id="admin">
+
+<div class="admin-header">
+
+<strong>
+⚙️ Admin Panel
+</strong>
+
+<button onclick="closeAdmin()">
+✕ Close
+</button>
+
+</div>
+
+<div class="admin-container">
+
+<div class="admin-section">
+
+<h3>🏪 Shop Settings</h3>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>Shop Name</label>
+
+<input
+id="aShop"
+>
+
+</div>
+
+<div class="field">
+
+<label>Owner Name</label>
+
+<input
+id="aOwner"
+>
+
+</div>
+
+<div class="field full">
+
+<label>Google Form URL</label>
+
+<input
+id="aForm"
+>
+
+</div>
+
+<div class="field">
+
+<label>Dhaka Delivery</label>
+
+<input
+id="aDhaka"
+type="number"
+>
+
+</div>
+
+<div class="field">
+
+<label>Outside Dhaka Delivery</label>
+
+<input
+id="aOutside"
+type="number"
+>
+
+</div>
+
+<div class="field full">
+
+<label>Notice</label>
+
+<textarea
+id="aNotice">
+</textarea>
+
+</div>
+
+</div>
+
+<button
+class="save-btn"
+onclick="saveShop()">
+💾 Save
+</button>
+
+</div>
+
+<div class="admin-section">
+
+<h3>💳 Payment Settings</h3>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>bKash Number</label>
+
+<input
+id="aBkash"
+>
+
+</div>
+
+<div class="field">
+
+<label>Nagad Number</label>
+
+<input
+id="aNagad"
+>
+
+</div>
+
+</div>
+
+<div class="help">
+
+<b>bKash:</b>
+<span id="adminBkash"></span>
+
+<br>
+
+<b>Nagad:</b>
+<span id="adminNagad"></span>
+
+<br><br>
+
+Cash On Delivery চালু থাকবে।
+
+</div>
+
+<button
+class="save-btn"
+onclick="savePayment()">
+💾 Save Payment
+</button>
+
+</div>
+
+<div class="admin-section">
+
+<h3>🎉 Offers</h3>
+
+<div class="field">
+
+<label>
+প্রতিটি Offer নতুন লাইনে লিখুন
+</label>
+
+<textarea
+id="aOffers">
+</textarea>
+
+</div>
+
+<button
+class="save-btn"
+onclick="saveOffers()">
+💾 Save Offers
+</button>
+
+</div>
+
+<div class="admin-section">
+
+<h3>🖼️ Cover Images</h3>
+
+<div class="field">
+
+<label>
+প্রতিটি Image URL নতুন লাইনে
+</label>
+
+<textarea
+id="aCovers">
+</textarea>
+
+</div>
+
+<button
+class="save-btn"
+onclick="saveCovers()">
+💾 Save Covers
+</button>
+
+</div>
+
+<div class="admin-section">
+
+<h3>🛍️ Product Management</h3>
+
+<div id="adminProducts">
+</div>
+
+<button
+class="blue-btn"
+onclick="addProduct()">
+➕ নতুন Product যোগ করুন
+</button>
+
+</div>
+
+<div class="admin-section">
+
+<h3>📋 Order & Payment System</h3>
+
+<div class="help">
+
+<b>Order System:</b>
+
+<br><br>
+
+Customer যখন
+<strong>অর্ডার করুন</strong>
+বাটনে ক্লিক করবে,
+তখন সরাসরি Google Form খুলবে।
+
+<br><br>
+
+Customer Google Form-এ নিজের
+নাম, ফোন, Gmail, ঠিকানা, Quantity ইত্যাদি
+দেবে।
+
+<br><br>
+
+Google Form Submit করার পর
+Google Form-এর Confirmation Message-এ
+bKash / Nagad / Cash On Delivery-এর
+Payment নির্দেশনা রাখতে হবে।
+
+<br><br>
+
+<b>Product Code:</b>
+
+প্রতিটি Product-এর Code আলাদা থাকবে।
+
+<br><br>
+
+SH001<br>
+SH002<br>
+PN001<br>
+EL001<br>
+JU001<br>
+CH001
+
+</div>
+
+</div>
+
+<div class="admin-section">
+
+<h3>📦 Data</h3>
+
+<button
+class="blue-btn"
+onclick="copyData()">
+📋 Copy Data
+</button>
+
+<button
+class="red-btn"
+onclick="resetData()">
+♻️ Reset
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="toast"
+id="toast">
+</div>
+
+<script>
+
+/* ==========================
+DATA
+========================== */
+
+const DEFAULT_DATA={
+
+shop:
+"আমার অনলাইন শপ",
+
+owner:
+"Tarek Hossen Nirob",
+
+form:
+"https://forms.gle/45BvpG3dpRtQ59ZP6",
+
+notice:
+"কম দামে ভালো পণ্য কিনুন",
+
+delivery:{
+dhaka:70,
+outside:150
+},
+
+payment:{
+bkash:"01913420216",
+nagad:"01830708260",
+cod:true
+},
+
+covers:[
+
+"https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80",
+
+"https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1400&q=80",
+
+"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1400&q=80"
+
+],
+
+offers:[
+
+"🎉 সীমিত সময়ের জন্য বিশেষ ছাড়!",
+
+"🛍️ একসাথে বেশি কিনলে আরও সাশ্রয়!"
+
+],
+
+products:[
+
+{
+id:1,
+code:"SH001",
+name:"Premium Shirt",
+cat:"শার্ট",
+group:"পোশাক",
+price:1000,
+disc:15,
+image:
+"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80",
+details:"Premium quality stylish shirt."
+},
+
+{
+id:2,
+code:"PN001",
+name:"Classic Pant",
+cat:"প্যান্ট",
+group:"পোশাক",
+price:1500,
+disc:20,
+image:
+"https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80",
+details:"Comfortable and stylish classic pant."
+},
+
+{
+id:3,
+code:"EL001",
+name:"Smart Electronic",
+cat:"ইলেকট্রনিক",
+group:"ইলেকট্রনিক",
+price:2500,
+disc:10,
+image:
+"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80",
+details:"Modern electronic product."
+},
+
+{
+id:4,
+code:"JU001",
+name:"Sports Shoes",
+cat:"জুতা",
+group:"জুতা",
+price:2000,
+disc:10,
+image:
+"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80",
+details:"Comfortable sports shoes."
+},
+
+{
+id:5,
+code:"CH001",
+name:"Fashion Glass",
+cat:"চশমা",
+group:"চশমা",
+price:650,
+disc:0,
+image:
+"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80",
+details:"Modern fashion glass."
+}
+
+]
+
+};
+
+
+let DATA=loadData();
+
+let selectedCategory="সব";
+
+let currentLanguage=
+localStorage.getItem("shopLanguage") || "bn";
+
+
+function loadData(){
+
+try{
+
+let saved=
+localStorage.getItem("shopData");
+
+if(saved){
+
+let x=JSON.parse(saved);
+
+return{
+
+...DEFAULT_DATA,
+
+...x,
+
+delivery:{
+...DEFAULT_DATA.delivery,
+...(x.delivery||{})
+},
+
+payment:{
+...DEFAULT_DATA.payment,
+...(x.payment||{})
+}
+
+};
+
+}
+
+}catch(e){}
+
+return JSON.parse(
+JSON.stringify(DEFAULT_DATA)
+);
+
+}
+
+
+function saveData(){
+
+localStorage.setItem(
+"shopData",
+JSON.stringify(DATA)
+);
+
+}
+
+
+/* ==========================
+LANGUAGES
+========================== */
+
+const LANG={
+
+bn:{
+products:"🛍️ পণ্য",
+offers:"🎉 বিশেষ অফার",
+productTitle:"🛍️ আমাদের পণ্য",
+payment:"💳 পেমেন্ট অপশন",
+search:"পণ্যের নাম বা Product Code দিয়ে খুঁজুন...",
+order:"🛒 অর্ডার করুন",
+details:"বিস্তারিত দেখুন",
+code:"Product Code",
+all:"সব",
+clothing:"পোশাক",
+shirt:"শার্ট",
+pant:"প্যান্ট",
+electronic:"ইলেকট্রনিক",
+shoes:"জুতা",
+glass:"চশমা"
+},
+
+en:{
+products:"🛍️ Products",
+offers:"🎉 Special Offers",
+productTitle:"🛍️ Our Products",
+payment:"💳 Payment Methods",
+search:"Search product name or Product Code...",
+order:"🛒 Order Now",
+details:"View Details",
+code:"Product Code",
+all:"All",
+clothing:"Clothing",
+shirt:"Shirt",
+pant:"Pants",
+electronic:"Electronic",
+shoes:"Shoes",
+glass:"Glasses"
+},
+
+zh:{
+products:"🛍️ 产品",
+offers:"🎉 特别优惠",
+productTitle:"🛍️ 我们的产品",
+payment:"💳 支付方式",
+search:"搜索产品名称或产品代码...",
+order:"🛒 立即订购",
+details:"查看详情",
+code:"产品代码",
+all:"全部",
+clothing:"服装",
+shirt:"衬衫",
+pant:"裤子",
+electronic:"电子产品",
+shoes:"鞋子",
+glass:"眼镜"
+},
+
+ja:{
+products:"🛍️ 商品",
+offers:"🎉 特別オファー",
+productTitle:"🛍️ 商品一覧",
+payment:"💳 お支払い方法",
+search:"商品名または商品コードを検索...",
+order:"🛒 注文する",
+details:"詳細を見る",
+code:"商品コード",
+all:"すべて",
+clothing:"衣類",
+shirt:"シャツ",
+pant:"パンツ",
+electronic:"電子機器",
+shoes:"靴",
+glass:"メガネ"
+},
+
+hi:{
+products:"🛍️ उत्पाद",
+offers:"🎉 विशेष ऑफर",
+productTitle:"🛍️ हमारे उत्पाद",
+payment:"💳 भुगतान विकल्प",
+search:"उत्पाद नाम या कोड खोजें...",
+order:"🛒 ऑर्डर करें",
+details:"विवरण देखें",
+code:"उत्पाद कोड",
+all:"सभी",
+clothing:"कपड़े",
+shirt:"शर्ट",
+pant:"पैंट",
+electronic:"इलेक्ट्रॉनिक",
+shoes:"जूते",
+glass:"चश्मा"
+},
+
+fr:{
+products:"🛍️ Produits",
+offers:"🎉 Offres spéciales",
+productTitle:"🛍️ Nos produits",
+payment:"💳 Modes de paiement",
+search:"Rechercher un produit ou un code...",
+order:"🛒 Commander",
+details:"Voir les détails",
+code:"Code produit",
+all:"Tous",
+clothing:"Vêtements",
+shirt:"Chemise",
+pant:"Pantalon",
+electronic:"Électronique",
+shoes:"Chaussures",
+glass:"Lunettes"
+},
+
+de:{
+products:"🛍️ Produkte",
+offers:"🎉 Sonderangebote",
+productTitle:"🛍️ Unsere Produkte",
+payment:"💳 Zahlungsmethoden",
+search:"Produktname oder Code suchen...",
+order:"🛒 Bestellen",
+details:"Details anzeigen",
+code:"Produktcode",
+all:"Alle",
+clothing:"Kleidung",
+shirt:"Hemd",
+pant:"Hose",
+electronic:"Elektronik",
+shoes:"Schuhe",
+glass:"Brillen"
+},
+
+es:{
+products:"🛍️ Productos",
+offers:"🎉 Ofertas especiales",
+productTitle:"🛍️ Nuestros productos",
+payment:"💳 Métodos de pago",
+search:"Buscar producto o código...",
+order:"🛒 Comprar",
+details:"Ver detalles",
+code:"Código del producto",
+all:"Todos",
+clothing:"Ropa",
+shirt:"Camisa",
+pant:"Pantalón",
+electronic:"Electrónica",
+shoes:"Zapatos",
+glass:"Gafas"
+},
+
+it:{
+products:"🛍️ Prodotti",
+offers:"🎉 Offerte speciali",
+productTitle:"🛍️ I nostri prodotti",
+payment:"💳 Metodi di pagamento",
+search:"Cerca prodotto o codice...",
+order:"🛒 Ordina",
+details:"Vedi dettagli",
+code:"Codice prodotto",
+all:"Tutti",
+clothing:"Abbigliamento",
+shirt:"Camicia",
+pant:"Pantaloni",
+electronic:"Elettronica",
+shoes:"Scarpe",
+glass:"Occhiali"
+},
+
+ko:{
+products:"🛍️ 상품",
+offers:"🎉 특별 할인",
+productTitle:"🛍️ 상품 목록",
+payment:"💳 결제 방법",
+search:"상품명 또는 상품 코드 검색...",
+order:"🛒 주문하기",
+details:"상세 보기",
+code:"상품 코드",
+all:"전체",
+clothing:"의류",
+shirt:"셔츠",
+pant:"바지",
+electronic:"전자제품",
+shoes:"신발",
+glass:"안경"
+},
+
+ar:{
+products:"🛍️ المنتجات",
+offers:"🎉 عروض خاصة",
+productTitle:"🛍️ منتجاتنا",
+payment:"💳 طرق الدفع",
+search:"ابحث عن المنتج أو الرمز...",
+order:"🛒 اطلب الآن",
+details:"عرض التفاصيل",
+code:"رمز المنتج",
+all:"الكل",
+clothing:"ملابس",
+shirt:"قميص",
+pant:"بنطال",
+electronic:"إلكترونيات",
+shoes:"أحذية",
+glass:"نظارات"
+},
+
+ru:{
+products:"🛍️ Товары",
+offers:"🎉 Специальные предложения",
+productTitle:"🛍️ Наши товары",
+payment:"💳 Способы оплаты",
+search:"Поиск товара или кода...",
+order:"🛒 Заказать",
+details:"Подробнее",
+code:"Код товара",
+all:"Все",
+clothing:"Одежда",
+shirt:"Рубашка",
+pant:"Брюки",
+electronic:"Электроника",
+shoes:"Обувь",
+glass:"Очки"
+},
+
+pt:{
+products:"🛍️ Produtos",
+offers:"🎉 Ofertas especiais",
+productTitle:"🛍️ Nossos produtos",
+payment:"💳 Métodos de pagamento",
+search:"Pesquisar produto ou código...",
+order:"🛒 Comprar",
+details:"Ver detalhes",
+code:"Código do produto",
+all:"Todos",
+clothing:"Roupas",
+shirt:"Camisa",
+pant:"Calça",
+electronic:"Eletrônicos",
+shoes:"Sapatos",
+glass:"Óculos"
+},
+
+tr:{
+products:"🛍️ Ürünler",
+offers:"🎉 Özel Teklifler",
+productTitle:"🛍️ Ürünlerimiz",
+payment:"💳 Ödeme Yöntemleri",
+search:"Ürün adı veya kodu ara...",
+order:"🛒 Sipariş Ver",
+details:"Detayları Gör",
+code:"Ürün Kodu",
+all:"Tümü",
+clothing:"Giyim",
+shirt:"Gömlek",
+pant:"Pantolon",
+electronic:"Elektronik",
+shoes:"Ayakkabı",
+glass:"Gözlük"
+},
+
+id:{
+products:"🛍️ Produk",
+offers:"🎉 Penawaran Khusus",
+productTitle:"🛍️ Produk Kami",
+payment:"💳 Metode Pembayaran",
+search:"Cari nama produk atau kode...",
+order:"🛒 Pesan Sekarang",
+details:"Lihat Detail",
+code:"Kode Produk",
+all:"Semua",
+clothing:"Pakaian",
+shirt:"Kemeja",
+pant:"Celana",
+electronic:"Elektronik",
+shoes:"Sepatu",
+glass:"Kacamata"
+}
+
+};
+
+
+/* ==========================
+LANGUAGE CHANGE
+========================== */
+
+function changeLanguage(lang){
+
+currentLanguage=lang;
+
+localStorage.setItem(
+"shopLanguage",
+lang
+);
+
+applyLanguage();
+
+renderProducts();
+
+renderPayment();
+
+}
+
+
+function applyLanguage(){
+
+const L=LANG[currentLanguage]||LANG.bn;
+
+document.getElementById(
+"productsBtn"
+).textContent=L.products;
+
+document.getElementById(
+"offerTitle"
+).textContent=L.offers;
+
+document.getElementById(
+"productTitle"
+).textContent=L.productTitle;
+
+document.getElementById(
+"paymentTitle"
+).textContent=L.payment;
+
+document.getElementById(
+"search"
+).placeholder=L.search;
+
+document
+.getElementById("languageSelect")
+.value=currentLanguage;
+
+}
+
+
+/* ==========================
+PRICE
+========================== */
+
+function finalPrice(p){
+
+return Math.round(
+Number(p.price) -
+(Number(p.price)*
+Number(p.disc||0)/100)
+);
+
+}
+
+
+/* ==========================
+SLIDER
+========================== */
+
+let slide=0;
+
+function renderSlider(){
+
+const box=
+document.getElementById("slider");
+
+box.innerHTML="";
+
+DATA.covers.forEach(
+(url,index)=>{
+
+const img=
+document.createElement("img");
+
+img.src=url;
+
+if(index===0)
+img.classList.add("active");
+
+box.appendChild(img);
+
+});
+
+slide=0;
+
+}
+
+
+setInterval(()=>{
+
+const imgs=
+document.querySelectorAll(
+"#slider img"
+);
+
+if(imgs.length<=1)
+return;
+
+imgs.forEach(
+x=>x.classList.remove("active")
+);
+
+slide++;
+
+if(slide>=imgs.length)
+slide=0;
+
+imgs[slide].classList.add("active");
+
+},4000);
+
+
+/* ==========================
+OFFERS
+========================== */
+
+function renderOffers(){
+
+const box=
+document.getElementById("offers");
+
+box.innerHTML="";
+
+DATA.offers.forEach(
+offer=>{
+
+const div=
+document.createElement("div");
+
+div.className="offer";
+
+div.textContent=offer;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* ==========================
+PRODUCT
+========================== */
+
+function renderProducts(){
+
+const box=
+document.getElementById("products");
+
+box.innerHTML="";
+
+const search=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+const list=
+DATA.products.filter(p=>{
+
+const matchSearch=
+
+String(p.name)
+.toLowerCase()
+.includes(search)
+
+||
+
+String(p.code)
+.toLowerCase()
+.includes(search)
+
+||
+
+String(p.cat)
+.toLowerCase()
+.includes(search);
+
+if(selectedCategory==="সব")
+return matchSearch;
+
+if(selectedCategory==="পোশাক")
+return matchSearch &&
+p.group==="পোশাক";
+
+return matchSearch &&
+(
+p.cat===selectedCategory ||
+p.group===selectedCategory
+);
+
+});
+
+
+if(!list.length){
+
+box.innerHTML=
+"<p>কোনো Product পাওয়া যায়নি।</p>";
+
+return;
+
+}
+
+
+const L=
+LANG[currentLanguage]||LANG.bn;
+
+
+list.forEach(p=>{
+
+const div=
+document.createElement("div");
+
+div.className="product";
+
+div.innerHTML=`
+
+<img
+class="product-image"
+src="${safe(p.image)}"
+alt="${safe(p.name)}"
+>
+
+<div class="product-body">
+
+<span class="product-category">
+${safe(p.group)} / ${safe(p.cat)}
+</span>
+
+<div class="product-code">
+${L.code}:
+<b>${safe(p.code)}</b>
+</div>
+
+<div class="product-name">
+${safe(p.name)}
+</div>
+
+<div class="price-row">
+
+<span class="price">
+৳${finalPrice(p)}
+</span>
+
+${
+Number(p.disc)>0
+?
+`
+<span class="old-price">
+৳${p.price}
+</span>
+
+<span class="discount">
+-${p.disc}%
+</span>
+`
+:""
+}
+
+</div>
+
+<div class="details">
+${safe(p.details)}
+</div>
+
+<div class="actions">
+
+<button
+class="order-btn"
+onclick="orderProduct(${p.id})"
+>
+${L.order}
+</button>
+
+<button
+class="details-btn"
+onclick="showDetails(${p.id})"
+>
+${L.details}
+</button>
+
+</div>
+
+</div>
+
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* ==========================
+CATEGORY
+========================== */
+
+function setCategory(category,button){
+
+selectedCategory=category;
+
+document
+.querySelectorAll(".categories button")
+.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+renderProducts();
+
+}
+
+
+/* ==========================
+ORDER
+========================== */
+
+function orderProduct(id){
+
+const p=
+DATA.products.find(
+x=>Number(x.id)===Number(id)
+);
+
+if(!p)
+return;
+
+if(!DATA.form){
+
+alert(
+"Google Form URL Admin Panel থেকে দিন।"
+);
+
+return;
+
+}
+
+window.open(
+DATA.form,
+"_blank"
+);
+
+}
+
+
+/* ==========================
+DETAILS
+========================== */
+
+function showDetails(id){
+
+const p=
+DATA.products.find(
+x=>Number(x.id)===Number(id)
+);
+
+if(!p)
+return;
+
+const L=
+LANG[currentLanguage]||LANG.bn;
+
+document.getElementById(
+"modalImage"
+).src=p.image;
+
+document.getElementById(
+"modalName"
+).textContent=p.name;
+
+document.getElementById(
+"modalCode"
+).textContent=
+L.code+": "+p.code;
+
+document.getElementById(
+"modalCategory"
+).textContent=
+p.group+" / "+p.cat;
+
+document.getElementById(
+"modalPrice"
+).textContent=
+"৳"+finalPrice(p);
+
+document.getElementById(
+"modalDetails"
+).textContent=p.details;
+
+document.getElementById(
+"modalOrder"
+).textContent=L.order;
+
+document.getElementById(
+"modalOrder"
+).onclick=()=>{
+closeDetails();
+orderProduct(p.id);
+};
+
+document.getElementById(
+"detailsModal"
+).style.display="block";
+
+}
+
+
+function closeDetails(){
+
+document.getElementById(
+"detailsModal"
+).style.display="none";
+
+}
+
+
+/* ==========================
+PAYMENT
+========================== */
+
+function renderPayment(){
+
+const box=
+document.getElementById("payment");
+
+box.innerHTML="";
+
+
+box.innerHTML+=`
+
+<div class="payment-card">
+
+<div class="payment-logo bkash">
+bK
+</div>
+
+<h3>bKash</h3>
+
+<div class="available">
+এই নম্বরে পেমেন্ট করুন
+</div>
+
+<div class="payment-number">
+${safe(DATA.payment.bkash)}
+</div>
+
+<div class="available">
+✓ bKash Payment Available
+</div>
+
+</div>
+
+`;
+
+
+box.innerHTML+=`
+
+<div class="payment-card">
+
+<div class="payment-logo nagad">
+N
+</div>
+
+<h3>Nagad</h3>
+
+<div class="available">
+এই নম্বরে পেমেন্ট করুন
+</div>
+
+<div class="payment-number">
+${safe(DATA.payment.nagad)}
+</div>
+
+<div class="available">
+✓ Nagad Payment Available
+</div>
+
+</div>
+
+`;
+
+
+if(DATA.payment.cod){
+
+box.innerHTML+=`
+
+<div class="payment-card">
+
+<div class="payment-logo cod">
+🚚
+</div>
+
+<h3>Cash On Delivery</h3>
+
+<div class="available">
+✓ Available
+</div>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* ==========================
+LOGIN
+========================== */
+
+function openLogin(){
+
+document.getElementById(
+"login"
+).style.display="block";
+
+document.getElementById(
+"password"
+).focus();
+
+}
+
+
+function closeLogin(){
+
+document.getElementById(
+"login"
+).style.display="none";
+
+document.getElementById(
+"password"
+).value="";
+
+}
+
+
+function loginAdmin(){
+
+const pass=
+document.getElementById(
+"password"
+).value;
+
+if(pass!=="217272"){
+
+alert("❌ ভুল Admin Password");
+
+return;
+
+}
+
+closeLogin();
+
+document.getElementById(
+"admin"
+).style.display="block";
+
+loadAdmin();
+
+}
+
+
+/* ==========================
+ADMIN LOAD
+========================== */
+
+function loadAdmin(){
+
+document.getElementById(
+"aShop"
+).value=DATA.shop;
+
+document.getElementById(
+"aOwner"
+).value=DATA.owner;
+
+document.getElementById(
+"aForm"
+).value=DATA.form;
+
+document.getElementById(
+"aDhaka"
+).value=DATA.delivery.dhaka;
+
+document.getElementById(
+"aOutside"
+).value=DATA.delivery.outside;
+
+document.getElementById(
+"aNotice"
+).value=DATA.notice;
+
+document.getElementById(
+"aBkash"
+).value=DATA.payment.bkash;
+
+document.getElementById(
+"aNagad"
+).value=DATA.payment.nagad;
+
+document.getElementById(
+"aOffers"
+).value=
+DATA.offers.join("\n");
+
+document.getElementById(
+"aCovers"
+).value=
+DATA.covers.join("\n");
+
+document.getElementById(
+"adminBkash"
+).textContent=
+DATA.payment.bkash;
+
+document.getElementById(
+"adminNagad"
+).textContent=
+DATA.payment.nagad;
+
+renderAdminProducts();
+
+}
+
+
+function closeAdmin(){
+
+document.getElementById(
+"admin"
+).style.display="none";
+
+}
+
+
+/* ==========================
+SAVE SHOP
+========================== */
+
+function saveShop(){
+
+DATA.shop=
+document.getElementById(
+"aShop"
+).value.trim();
+
+DATA.owner=
+document.getElementById(
+"aOwner"
+).value.trim();
+
+DATA.form=
+document.getElementById(
+"aForm"
+).value.trim();
+
+DATA.delivery.dhaka=
+Number(
+document.getElementById(
+"aDhaka"
+).value
+)||0;
+
+DATA.delivery.outside=
+Number(
+document.getElementById(
+"aOutside"
+).value
+)||0;
+
+DATA.notice=
+document.getElementById(
+"aNotice"
+).value.trim();
+
+saveData();
+
+document.getElementById(
+"shopLogo"
+).textContent=DATA.shop;
+
+document.getElementById(
+"notice"
+).textContent=DATA.notice;
+
+toast("✓ Shop Settings Save হয়েছে");
+
+}
+
+
+/* ==========================
+PAYMENT SAVE
+========================== */
+
+function savePayment(){
+
+DATA.payment.bkash=
+document.getElementById(
+"aBkash"
+).value.trim();
+
+DATA.payment.nagad=
+document.getElementById(
+"aNagad"
+).value.trim();
+
+saveData();
+
+renderPayment();
+
+document.getElementById(
+"adminBkash"
+).textContent=
+DATA.payment.bkash;
+
+document.getElementById(
+"adminNagad"
+).textContent=
+DATA.payment.nagad;
+
+toast("✓ Payment Save হয়েছে");
+
+}
+
+
+/* ==========================
+OFFERS SAVE
+========================== */
+
+function saveOffers(){
+
+DATA.offers=
+document.getElementById(
+"aOffers"
+).value
+.split("\n")
+.map(x=>x.trim())
+.filter(Boolean);
+
+saveData();
+
+renderOffers();
+
+toast("✓ Offers Save হয়েছে");
+
+}
+
+
+/* ==========================
+COVERS SAVE
+========================== */
+
+function saveCovers(){
+
+DATA.covers=
+document.getElementById(
+"aCovers"
+).value
+.split("\n")
+.map(x=>x.trim())
+.filter(Boolean);
+
+saveData();
+
+renderSlider();
+
+toast("✓ Covers Save হয়েছে");
+
+}
+
+
+/* ==========================
+ADMIN PRODUCTS
+========================== */
+
+function renderAdminProducts(){
+
+const box=
+document.getElementById(
+"adminProducts"
+);
+
+box.innerHTML="";
+
+
+DATA.products.forEach(
+(p,index)=>{
+
+box.innerHTML+=`
+
+<div class="product-admin">
+
+<div class="product-admin-head">
+
+<strong>
+${index+1}. ${safe(p.name)}
+</strong>
+
+<button
+class="red-btn"
+onclick="deleteProduct(${p.id})"
+>
+Delete
+</button>
+
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+Product Code
+</label>
+
+<input
+id="code_${p.id}"
+value="${attr(p.code)}"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Product Name
+</label>
+
+<input
+id="name_${p.id}"
+value="${attr(p.name)}"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Category
+</label>
+
+<select
+id="cat_${p.id}"
+>
+
+<option
+value="শার্ট"
+${p.cat==="শার্ট"?"selected":""}
+>
+শার্ট
+</option>
+
+<option
+value="প্যান্ট"
+${p.cat==="প্যান্ট"?"selected":""}
+>
+প্যান্ট
+</option>
+
+<option
+value="ইলেকট্রনিক"
+${p.cat==="ইলেকট্রনিক"?"selected":""}
+>
+ইলেকট্রনিক
+</option>
+
+<option
+value="জুতা"
+${p.cat==="জুতা"?"selected":""}
+>
+জুতা
+</option>
+
+<option
+value="চশমা"
+${p.cat==="চশমা"?"selected":""}
+>
+চশমা
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Main Category
+</label>
+
+<select
+id="group_${p.id}"
+>
+
+<option
+value="পোশাক"
+${p.group==="পোশাক"?"selected":""}
+>
+পোশাক
+</option>
+
+<option
+value="ইলেকট্রনিক"
+${p.group==="ইলেকট্রনিক"?"selected":""}
+>
+ইলেকট্রনিক
+</option>
+
+<option
+value="জুতা"
+${p.group==="জুতা"?"selected":""}
+>
+জুতা
+</option>
+
+<option
+value="চশমা"
+${p.group==="চশমা"?"selected":""}
+>
+চশমা
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Price
+</label>
+
+<input
+id="price_${p.id}"
+type="number"
+value="${p.price}"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Discount %
+</label>
+
+<input
+id="disc_${p.id}"
+type="number"
+value="${p.disc}"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+Image URL
+</label>
+
+<input
+id="image_${p.id}"
+value="${attr(p.image)}"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+Product Details
+</label>
+
+<textarea
+id="details_${p.id}"
+>${safe(p.details)}</textarea>
+
+</div>
+
+
+</div>
+
+
+<button
+class="save-btn"
+onclick="saveProduct(${p.id})"
+>
+💾 Save Product
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ==========================
+SAVE PRODUCT
+========================== */
+
+function saveProduct(id){
+
+const p=
+DATA.products.find(
+x=>Number(x.id)===Number(id)
+);
+
+if(!p)
+return;
+
+
+const newCode=
+document.getElementById(
+"code_"+id
+).value.trim();
+
+
+const duplicate=
+DATA.products.some(
+x=>
+Number(x.id)!==Number(id) &&
+x.code.toLowerCase()===
+newCode.toLowerCase()
+);
+
+
+if(duplicate){
+
+alert(
+"❌ এই Product Code ইতিমধ্যে ব্যবহার হয়েছে। অন্য Code দিন।"
+);
+
+return;
+
+}
+
+
+p.code=newCode;
+
+p.name=
+document.getElementById(
+"name_"+id
+).value.trim();
+
+p.cat=
+document.getElementById(
+"cat_"+id
+).value;
+
+p.group=
+document.getElementById(
+"group_"+id
+).value;
+
+p.price=
+Number(
+document.getElementById(
+"price_"+id
+).value
+)||0;
+
+p.disc=
+Number(
+document.getElementById(
+"disc_"+id
+).value
+)||0;
+
+p.image=
+document.getElementById(
+"image_"+id
+).value.trim();
+
+p.details=
+document.getElementById(
+"details_"+id
+).value.trim();
+
+
+saveData();
+
+renderProducts();
+
+renderAdminProducts();
+
+toast(
+"✓ Product Save হয়েছে"
+);
+
+}
+
+
+/* ==========================
+ADD PRODUCT
+========================== */
+
+function addProduct(){
+
+let id=1;
+
+while(
+DATA.products.some(
+p=>Number(p.id)===id
+)
+){
+
+id++;
+
+}
+
+
+let number=1;
+
+let code="NEW001";
+
+while(
+DATA.products.some(
+p=>p.code===code
+)
+){
+
+number++;
+
+code=
+"NEW"+
+String(number)
+.padStart(3,"0");
+
+}
+
+
+DATA.products.push({
+
+id:id,
+
+code:code,
+
+name:"নতুন পণ্য",
+
+cat:"শার্ট",
+
+group:"পোশাক",
+
+price:0,
+
+disc:0,
+
+image:"",
+
+details:"পণ্যের বিস্তারিত লিখুন।"
+
+});
+
+
+saveData();
+
+renderProducts();
+
+renderAdminProducts();
+
+toast(
+"✓ নতুন Product যোগ হয়েছে। Code: "+code
+);
+
+}
+
+
+/* ==========================
+DELETE
+========================== */
+
+function deleteProduct(id){
+
+if(
+!confirm(
+"এই Product Delete করবেন?"
+)
+)
+return;
+
+DATA.products=
+DATA.products.filter(
+p=>Number(p.id)!==Number(id)
+);
+
+saveData();
+
+renderProducts();
+
+renderAdminProducts();
+
+toast(
+"✓ Product Delete হয়েছে"
+);
+
+}
+
+
+/* ==========================
+COPY DATA
+========================== */
+
+function copyData(){
+
+const text=
+JSON.stringify(
+DATA,
+null,
+4
+);
+
+if(
+navigator.clipboard
+){
+
+navigator.clipboard
+.writeText(text)
+.then(
+()=>{
+toast(
+"✓ Data Copy হয়েছে"
+);
+}
+);
+
+}else{
+
+prompt(
+"Data Copy করুন:",
+text
+);
+
+}
+
+}
+
+
+/* ==========================
+RESET
+========================== */
+
+function resetData(){
+
+if(
+!confirm(
+"সব পরিবর্তন মুছে Default Data আনবেন?"
+)
+)
+return;
+
+localStorage.removeItem(
+"shopData"
+);
+
+DATA=
+JSON.parse(
+JSON.stringify(DEFAULT_DATA)
+);
+
+saveData();
+
+renderAll();
+
+loadAdmin();
+
+toast(
+"✓ Default Data ফিরে এসেছে"
+);
+
+}
+
+
+/* ==========================
+SCROLL
+========================== */
+
+function scrollProducts(){
+
+document
+.getElementById("productTitle")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* ==========================
+SAFE
+========================== */
+
+function safe(value){
+
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function attr(value){
+
+return safe(value);
+
+}
+
+
+/* ==========================
+TOAST
+========================== */
+
+function toast(text){
+
+const box=
+document.getElementById("toast");
+
+box.textContent=text;
+
+box.style.display="block";
+
+setTimeout(
+()=>{
+box.style.display="none";
+},
+2200
+);
+
+}
+
+
+/* ==========================
+START
+========================== */
+
+function renderAll(){
+
+document.getElementById(
+"shopLogo"
+).textContent=DATA.shop;
+
+document.getElementById(
+"notice"
+).textContent=DATA.notice;
+
+renderSlider();
+
+renderOffers();
+
+renderProducts();
+
+renderPayment();
+
+applyLanguage();
+
+}
+
+
+renderAll();
+
+</script>
+
+</body>
+</html>
